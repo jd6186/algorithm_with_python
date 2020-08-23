@@ -47,16 +47,87 @@
 
 
 지금은 2번이 더 효율적이라 판단되니 2번으로 해보겠다.
+우선 length가 7일 때 전체 값의 합 구해서 100이면 return arr
+length가 7보다 클 때 반복문 돌려서 arrTest[i]를 계속 새로운 값을 넣어보면서 100이되는게 있나 찾기 있으면 바로 return arr
+
+```
 i = 0
 arr = []
+arrTest = []
 while(i < 9):
-  arr.append(input());
-  
-  if(arr.length >= 7):
+  if(len(arr) == 7):
+      j = 0
+      for j in range(0, len(arr), 1):
+          addNum = int(input())
+          arr[j] = addNum
+          if(arr.sum() == 100):
+              return arr
+          else:
+              continue          
+                    
+  arr.append(int(input()))
+  if(len(arr) >= 7):
     if(arr.sum == 100):
       return arr
-    elif():
-      length가 7보다 클 때 반복문 돌려서 arr[i]를 계속 새로운 값을 넣어보면서 100이되는게 있나 찾기 있으면 바로 return arr 
+    elif(): 
+        continue
+```
+
+// 문제를 풀다 발견된 문제점 이렇게 할 경우 8번째 숫자가 입력되었을 때 값이 있다면 다행이지만 9번째 숫자가 반드시 필요하다면 문제가 복잡해진다.
+// 8번째와 9번째 숫자가 모두 필요할 수도 있고 9번째만 필요할 수도 있기 때문에 경우의 수가 너무 복잡해진다.
+
+// 결국 다른 방법 필요
+// 일일이 구하는건? 
+```
+i = 0
+arr = []
+# 값 받기
+for i in range(0, 9, 1):
+    arr.append(int(input()))
+
+# 값 정렬
+arr.sort(key=None, reverse=True)
+
+# 값 분석
+for j in range(0, 3, 1):
+    print("몇 회차니? : ", j)
+    arrT = [arr[j]]
+    sums = arr[j]
+    k = j+1
+    while(True):
+        print("몇 회차니? : ", j, " 그리고  ", k+6)
+        if(k+6 > len(arr)):
+            break
+        for z in range(k, k+6, 1):
+            sums = sums + arr[z]
+            arrT.append(arr[z])
+        print(sums)
+        if(sums != 100):
+            arrT = [arr[j]]
+            sums = arr[j]
+            k += 1
+            continue
+        elif(sums == 100) :
+            print("결과값 : ",arrT)
+            break
+    if(sums == 100):
+        break
+    else :
+        continue
+```
+
+// 이것도 아니다. 이렇게 구할 수 없을 뿐더러 분명히 시간초과다.
+// 다른 접근 방법이 필요한데 이제 이 문제의 유형인 브루트 포스에 대해 알아보자
+
+* 브루트 포스란?
+* 이산수학 또는 수리논리학으로서 
+* 조합 가능한 모든 문자열을 하나씩 대입해 보는 방식으로 암호를 해독하는 방법이라는 뜻이다. 
+* 하지만 이런 방법은 엄청난 시간복잡도를 야기 시키기 때문에 대부분 동적계획법(DP = Dynamic Programming)으로 변환하고 있는 추세이다.
+
+
+자 이제 위 개념을 가지고 문제를 어떤 식으로 접근해볼까요?
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
