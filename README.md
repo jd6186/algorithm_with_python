@@ -158,7 +158,8 @@ for i in range(9):
 res = sum(arr)
 
 # 값 정렬하기
-arr.sort(key=None, reverse=False)
+# arr.sort(key=None, reverse=False) 
+# 이걸 작성하셨던데 이건 그냥 빼는게 시간복잡도를 떨어뜨리는 길이다... 어차피 모든 수를 봐야하기 때문에 이건 의미가 없다. 왜하셨지..
 
 # 배열 순환하며 값찾기 인자가 2개밖에 없으므로 2중 for문이면 가능하다.
 for i in range(9):
